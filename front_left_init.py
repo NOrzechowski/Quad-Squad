@@ -64,7 +64,28 @@ try:
 	        if encoder == 10:
     	    	    encoder = 0
 	            break
-	motors_1.motor1.disable();
+        elif ord(key) == ord('z'):
+            encoder = 0
+     	    motors_1.motor2.enable()
+            motors_1.motor2.setSpeed(slow_reverse)
+    	    while True:
+		GPIO.wait_for_edge(encoder_m2, GPIO.RISING)
+                encoder = encoder + 1
+	        if encoder == 10:
+    	    	    encoder = 0
+	            break
+        elif ord(key) == ord('c'):
+            encoder = 0
+     	    motors_1.motor2.enable()
+            motors_1.motor2.setSpeed(slow_forward)
+    	    while True:
+		GPIO.wait_for_edge(encoder_m2, GPIO.RISING)
+                encoder = encoder + 1
+	        if encoder == 10:
+    	    	    encoder = 0
+	            break
+        motors_1.motor1.disable();
+        motors_1.motor2.disable();
     GPIO.cleanup()
     motors_1.setSpeeds(0,0)
     motors_1.disable()
