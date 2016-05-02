@@ -29,17 +29,15 @@ try:
     motors_4.setSpeeds(0, 0) 
     motors_2.disable()
     motors_2.setSpeeds(0, 0)
-    motors_3.disable()
-    motors_3.setSpeeds(0, 0)
+    motors_1.disable()
+    motors_1.setSpeeds(0, 0)
     # setup motors
-    motors_1.enable()
-    #motors_1.motor2.disable()
-    motors_1.setSpeeds(0,0)
-    #motors_1.motor1.enable()
-    motors_1.motor1.setSpeed(0)
-    motors_1.motor2.setSpeed(0)
-    encoder_m1 = 14
-    encoder_m2 = 2
+    motors_2.enable()
+    motors_2.setSpeeds(0,0)
+    motors_2.motor1.setSpeed(0)
+    motors_2.motor2.setSpeed(0)
+    encoder_m1 = 3
+    encoder_m2 = 4
     # Setup GPIO
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(encoder_m1, GPIO.IN, pull_up_down = GPIO.PUD_UP)
@@ -49,8 +47,8 @@ try:
         key = getch()
         if ord(key) == ord('a'):
 	    encoder = 0
-            motors_1.motor1.enable()
-            motors_1.motor1.setSpeed(slow_forward)
+            motors_2.motor1.enable()
+            motors_2.motor1.setSpeed(slow_forward)
     	    while True:
 		print(encoder)
 		GPIO.wait_for_edge(encoder_m1, GPIO.RISING)
@@ -60,8 +58,8 @@ try:
 	            break
         elif ord(key) == ord('d'):
             encoder = 0
-            motors_1.motor1.enable()
-            motors_1.motor1.setSpeed(slow_reverse)
+            motors_2.motor1.enable()
+            motors_2.motor1.setSpeed(slow_reverse)
     	    while True:
 		print(encoder)
 		GPIO.wait_for_edge(encoder_m1, GPIO.RISING)
@@ -71,8 +69,8 @@ try:
 	            break
         elif ord(key) == ord('z'):
             encoder = 0
-     	    motors_1.motor2.enable()
-            motors_1.motor2.setSpeed(slow_forward)
+     	    motors_2.motor2.enable()
+            motors_2.motor2.setSpeed(slow_forward)
     	    while True:
 		print(encoder)
 		GPIO.wait_for_edge(encoder_m2, GPIO.RISING)
@@ -82,8 +80,8 @@ try:
 	            break
         elif ord(key) == ord('c'):
             encoder = 0
-     	    motors_1.motor2.enable()
-            motors_1.motor2.setSpeed(slow_reverse)
+     	    motors_2.motor2.enable()
+            motors_2.motor2.setSpeed(slow_reverse)
     	    while True:
 		print(encoder)
 		GPIO.wait_for_edge(encoder_m2, GPIO.RISING)
@@ -91,14 +89,14 @@ try:
 	        if encoder == 10:
     	    	    encoder = 0
 	            break
-        motors_1.motor1.disable();
-        motors_1.motor2.disable();
+        motors_2.motor1.disable();
+        motors_2.motor2.disable();
     GPIO.cleanup()
-    motors_1.setSpeeds(0,0)
-    motors_1.disable()
+    motors_2.setSpeeds(0,0)
+    motors_2.disable()
 finally:
   # Stop the motors, even if there is an exception
   # or the user presses Ctrl+C to kill the process.
   GPIO.cleanup()
-  motors_1.setSpeeds(0, 0)
-  motors_1.disable()
+  motors_2.setSpeeds(0, 0)
+  motors_2.disable()
